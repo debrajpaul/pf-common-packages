@@ -1,0 +1,14 @@
+version: v1
+plugins:
+  - plugin: buf.build/community/stephenh-ts-proto
+    out: gen
+    opt:
+      - env=node
+      - outputServices=grpc-js
+      - useExactTypes=false
+      - stringEnums=true
+      - forceLong=long
+      - esModuleInterop=true
+      - unrecognizedEnum=false
+      - outputJsonMethods=false
+      - useAsyncIterable=false

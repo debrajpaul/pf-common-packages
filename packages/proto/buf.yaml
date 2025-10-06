@@ -1,0 +1,14 @@
+version: v1
+name: buf.build/your-org/pf-protos   # <- replace with your org if you want
+deps: []
+build:
+  excludes:
+    - node_modules
+    - dist
+    - gen
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE

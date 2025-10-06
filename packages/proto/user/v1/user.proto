@@ -1,0 +1,26 @@
+syntax = "proto3";
+package user.v1;
+
+import "common/v1/context.proto";
+
+option go_package = "userv1";
+
+service UserService {
+  rpc GetMe(GetMeRequest) returns (GetMeResponse);
+  rpc ValidateJwt(ValidateJwtRequest) returns (ValidateJwtResponse);
+}
+
+message GetMeRequest { common.v1.TenantContext ctx = 1; }
+message GetMeResponse {
+  string user_id   = 1;
+  string email     = 2;
+  string tenant_id = 3;
+}
+
+message ValidateJwtRequest { string jwt = 1; }
+message ValidateJwtResponse {
+  bool valid       = 1;
+  string tenant_id = 2;
+  string user_id   = 3;
+  string email     = 4;
+}

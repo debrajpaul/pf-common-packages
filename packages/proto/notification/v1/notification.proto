@@ -1,0 +1,29 @@
+syntax = "proto3";
+package notification.v1;
+
+import "common/v1/context.proto";
+
+option go_package = "notificationv1";
+
+service NotificationService {
+  rpc SendEmail(SendEmailRequest) returns (SendResponse);
+  rpc SendSms(SendSmsRequest) returns (SendResponse);
+}
+
+message SendEmailRequest {
+  common.v1.TenantContext ctx = 1;
+  string to = 2;
+  string template = 3;                // template key
+  map<string, string> data = 4;       // template variables
+}
+
+message SendSmsRequest {
+  common.v1.TenantContext ctx = 1;
+  string to = 2;
+  string text = 3;
+}
+
+message SendResponse {
+  string id = 1;
+  string status = 2;  // "QUEUED", "SENT", "FAILED"
+}

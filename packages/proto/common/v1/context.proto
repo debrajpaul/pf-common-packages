@@ -1,0 +1,13 @@
+syntax = "proto3";
+package common.v1;
+
+option go_package = "commonv1";
+
+message TenantContext {
+  string tenant_id = 1;
+  string user_id   = 2;
+  string email     = 3;
+  string request_id = 4;
+}
+
+message Empty {}

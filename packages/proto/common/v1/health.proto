@@ -1,0 +1,16 @@
+syntax = "proto3";
+package common.v1;
+
+option go_package = "commonv1";
+
+message HealthCheckRequest {
+  string service = 1; // optional logical service name
+}
+
+message HealthCheckResponse {
+  string status = 1; // "SERVING", "NOT_SERVING", "UNKNOWN"
+}
+
+service HealthService {
+  rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+}
