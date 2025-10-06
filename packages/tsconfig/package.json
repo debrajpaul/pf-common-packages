@@ -1,0 +1,12 @@
+{
+  "name": "@pf/tsconfig",
+  "version": "0.0.0",
+  "private": false,
+  "license": "MIT",
+  "main": "base.json",
+  "files": ["*.json"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  }
+}

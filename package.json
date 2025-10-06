@@ -1,0 +1,23 @@
+{
+  "name": "pf-common-packages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r --filter ./packages... run build",
+    "clean": "pnpm -r --filter ./packages... run clean || true",
+    "lint": "pnpm -r --filter ./packages... run lint || true",
+    "test": "pnpm -r --filter ./packages... run test || true"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3"
+  }
+}
