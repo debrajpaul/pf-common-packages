@@ -1,0 +1,35 @@
+syntax = "proto3";
+package budget.v1;
+
+import "common/v1/context.proto";
+
+option go_package = "budgetv1";
+
+service BudgetService {
+  rpc MonthlyReview(MonthlyReviewRequest) returns (BudgetSummary);
+  rpc AnnualReview(AnnualReviewRequest) returns (BudgetSummary);
+}
+
+message MonthlyReviewRequest {
+  common.v1.TenantContext ctx = 1;
+  int32 month = 2;  // 1..12
+  int32 year  = 3;
+}
+
+message AnnualReviewRequest {
+  common.v1.TenantContext ctx = 1;
+  int32 year  = 2;
+}
+
+message CategoryBreakdown {
+  string category = 1;
+  double amount   = 2;
+}
+
+message BudgetSummary {
+  double income = 1;
+  double expenses = 2;
+  double savings = 3;
+  repeated CategoryBreakdown breakdown = 4;
+  string recommendations = 5;
+}

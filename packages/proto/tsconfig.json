@@ -1,5 +1,9 @@
 {
   "extends": "@pf/tsconfig/base.json",
-  "include": ["src"],
-  "compilerOptions": { "outDir": "dist" }
+  "include": ["src", "gen"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "resolveJsonModule": true
+  }
 }

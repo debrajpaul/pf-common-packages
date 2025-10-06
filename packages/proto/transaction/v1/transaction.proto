@@ -1,0 +1,49 @@
+syntax = "proto3";
+package transaction.v1;
+
+import "common/v1/context.proto";
+
+option go_package = "transactionv1";
+
+service TransactionService {
+  rpc IngestStatement(IngestStatementRequest) returns (IngestStatementResponse);
+  rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsResponse);
+  rpc GetTransaction(GetTransactionRequest) returns (Transaction);
+}
+
+message IngestStatementRequest {
+  common.v1.TenantContext ctx = 1;
+  string s3_uri = 2;         // e.g., s3://bucket/tenantId/2025-10/file.pdf
+  string source = 3;         // "HDFC_PDF", "CSV_UPLOAD", etc.
+  string request_id = 4;     // idempotency token
+}
+message IngestStatementResponse {
+  int32 accepted = 1;        // number of lines/entries accepted
+}
+
+message ListTransactionsRequest {
+  common.v1.TenantContext ctx = 1;
+  int32 limit  = 2;
+  string cursor = 3;
+  string category = 4;       // optional filter
+}
+message ListTransactionsResponse {
+  repeated Transaction items = 1;
+  string next_cursor = 2;
+}
+
+message GetTransactionRequest {
+  common.v1.TenantContext ctx = 1;
+  string id = 2;
+}
+
+message Transaction {
+  string id = 1;
+  string description = 2;
+  double amount = 3;
+  string category = 4;
+  int64 ts = 5;              // epoch millis
+  string account = 6;
+  string currency = 7;       // "INR" etc.
+  string raw = 8;            // optional raw memo
+}
